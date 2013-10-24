@@ -30,3 +30,6 @@
 *.vrb
 *.xdy
 *.tdo
+*.fls
+*.pdf
+*.tex~
