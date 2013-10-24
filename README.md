@@ -1,4 +1,4 @@
-ML-cheatsheet
-=============
+Machine Learning Cheatsheet
+===========================
 
-Machine Learning cheatsheet
+A one page, front and back, cheatsheet for important machine learning concepts.
