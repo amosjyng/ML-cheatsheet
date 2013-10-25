@@ -116,18 +116,35 @@
 	= \underset{\theta}{\argmax} \ P(D | \theta) P(\theta)
 \end{equation*}
 
-\section{Classification techniques}
+\section{Regression}
+
+\subsection{Linear Regression}
+
+\emph{Objective:} Minimize squared distance of points from predicted line.
+
+
+\section{Classification}
 
 \subsection{Logistic Regression}
 
 \subsection{Naive Bayes}
 
-Independence assumption:
+Assumes that features are independent of one another. Thus, learning and classification for each feature happens independently of other features.
 
-\begin{equation*}
-	P(X_1, ... X_n | Y) = \prod_{i} P(X_i | Y)
-\end{equation*}
+\emph{Classifies} input vector $<x_1, ..., x_n>$ as class $y$ according to
+\begin{align*}
+	\underset{y}{\argmax} \ P(y | x_1, ..., x_n)
+	&= \underset{y}{\argmax} \ P(x_1, ..., x_n | y) P(y)\\
+	&= \underset{y}{\argmax} \ P(y) \prod_{i}^{n} P(x_i | y)
+\end{align*}
 
+\emph{Learns} $P(x_i | y)$ for
+\begin{itemize}
+	\item \emph{Discrete $x_i$} -- $P(x_i | y) = \frac{\#D(X_i = x_i, Y = y)}{\#D(Y = y)}$
+	
+	For smoothing, use $P(x_i | y) = \frac{\#D(X_i = x_i, Y = y) + k}{\#D(Y = y) + n_i k}$, where $n_i$ is the number of different possible values for $X_i$
+	\item \emph{Continuous $x_i$} -- Can use any PDF, but usually use Gaussian $P(x_i | y) = \mathcal{N}(\mu_{X_i | y}, \sigma_{X_i | y}^2)$, where $\mu_{X_i | y}$ and $\sigma_{X_i | y}$ are, respectively, the average and variance of $X_i$ for all data points where $Y = y$. The Gaussian distribution already provides smoothing.
+\end{itemize}
 
 \subsection{Perceptron}
 
