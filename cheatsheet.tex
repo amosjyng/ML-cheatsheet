@@ -120,7 +120,11 @@
 
 \subsection{Linear Regression}
 
-\emph{Objective:} Minimize squared distance of points from predicted line.
+Find optimal $w$ and $b$ such that the average distance of points from the line is minimized:
+
+\begin{equation*}
+\underset{w,b}{\argmax} \ \sum_{i=1}^{n} \frac{1}{2} \left( w x_i + b - y_i \right)^2
+\end{equation*}
 
 
 \section{Classification}
