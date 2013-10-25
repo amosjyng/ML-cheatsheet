@@ -152,6 +152,22 @@ Assumes that features are independent of one another. Thus, learning and classif
 
 \subsection{Perceptron}
 
+Produces linear decision boundaries.
+
+\emph{Classifies} using the non-linear sigmoid (logistic) decision function:
+\begin{equation*}
+\hat{y} = \frac{1}{1+e^{- (w^T x + b)}} - 0.5
+\end{equation*}
+
+\emph{Learns} $w$ and $b$ by updating $w$ whenever $\hat{y} y \leq 0$ (i.e. incorrectly classified). Updates as such:
+\begin{align*}
+w &\leftarrow w + x_i y_i\\
+b &\leftarrow b + y_i
+\end{align*}
+Repeat until all examples are correctly classified.
+
+$w$ is some linear combination $\sum_{i} \alpha_i x_i$ of data points, and decision boundary is the linear hyperplane $f(x) = w^T x + b$.
+
 \subsection{SVM}
 
 \end{multicols}
