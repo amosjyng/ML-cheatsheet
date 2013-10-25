@@ -170,5 +170,36 @@ $w$ is some linear combination $\sum_{i} \alpha_i x_i$ of data points, and decis
 
 \subsection{SVM}
 
+\section{Convergence of...}
+
+\subsection{Gradient Descent}
+
+\subsection{Stochastic Gradient Descent}
+
+\subsection{Newton Method}
+
+\subsection{Perceptron}
+
+Assume
+\begin{itemize}
+	\item $\exists w^*$ such that $||w^*|| = 1$
+	\item $\exists \gamma > 0$ such that $\forall t = 1 ... n,\ y_t(x_t \cdot w^*) \geq \gamma$
+	\item $\forall t = 1 ... n,\ ||x_t|| \leq R$
+\end{itemize}
+
+Then the perceptron algorithm makes at most $R^2 / \gamma^2$ errors.
+
+Proof
+\begin{itemize}
+	\item Bound $w^{k + 1} \cdot w^* \rightarrow ||w^{k + 1}|| \geq k \gamma$
+	\item Bound $||w^{k + 1}||^2
+	$\begin{align*}
+		k R^2 &\geq ||w^{k + 1}||^2 \geq k^2 \gamma^2\\
+		\frac{R^2}{\gamma^2} &\geq k
+	\end{align*}
+\end{itemize}
+
+\subsection{SVM}
+
 \end{multicols}
 \end{document}
