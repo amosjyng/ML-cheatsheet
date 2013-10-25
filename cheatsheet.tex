@@ -168,6 +168,8 @@ Repeat until all examples are correctly classified.
 
 $w$ is some linear combination $\sum_{i} \alpha_i x_i$ of data points, and decision boundary is the linear hyperplane $f(x) = w^T x + b$.
 
+Note that the perceptron is the same as stochastic gradient descent with a hinge loss function of $max(0, 1 - y_i [<w, x_i> + b])$
+
 \subsection{SVM}
 
 \section{Convergence of...}
