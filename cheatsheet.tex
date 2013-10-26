@@ -121,11 +121,21 @@
 \subsection{Linear Regression}
 
 Find optimal $w$ and $b$ such that the average distance of points from the line is minimized:
-
 \begin{equation*}
 \underset{w,b}{\argmax} \ \sum_{i=1}^{n} \frac{1}{2} \left( w x_i + b - y_i \right)^2
 \end{equation*}
+Differentiate, and solution is
+\begin{equation*}
+\left[ \sum_{i = 1}^{n} x_i x_i^T \right] w = \sum_{i = 1}^{n} y_i x_i
+\end{equation*}
 
+Eigenvalues of $x^T x$ are positive. Use $x^T M x \geq 0 \:\forall x \in R^n$ to prove this:
+\begin{align*}
+v^T \sum_{i} x_i x_i^T v \geq 0\\
+\sum_{i} (v^t x_i)^2 \geq 0
+\end{align*}
+
+\emph{Note} that when the data does not span the entire space, $x^T x$ does not have full rank, and thus is non-invertible. This can be fixed by either decomposition through removing eigenvalues below a certain threshold, or adding a small $\epsilon$ to the diagonal of the matrix.
 
 \section{Classification}
 
