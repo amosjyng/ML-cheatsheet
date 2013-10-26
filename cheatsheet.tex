@@ -214,5 +214,14 @@ If we don't include $b$ as part of $w$, this becomes
 
 \subsection{SVM}
 
+\section{Parzen Window}
+
+\begin{align*}
+p_{emp}(x) &= \frac{1}{n} \sum_{i = 1}^{n} \delta_{xi}(x)\\
+\hat{p}(x) &= \frac{1}{n} \sum_{i = 1}^{n} k_{xi}(x)
+\end{align*}
+
+Conditions for a smoothing kernel are $\int k(x) dx = 1$, $\int x k(x) dx = 0$, and $\int x^2 k(x) dx = 0$.
+
 \end{multicols}
 \end{document}
