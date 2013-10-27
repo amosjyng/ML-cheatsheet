@@ -244,9 +244,16 @@ Choose an initial point that is close enough to $x^*$, then update
 \begin{equation*}
 x_{new} = x_{old} - \frac{f'(x)}{f''(x)}
 \end{equation*}
-Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable.
+Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable. Inside the bound, convergence is
+\begin{equation*}
+||x_{n + 1} - x^*|| \leq \gamma || \left[ \delta_x^2 f(x_n) \right]^{-1} || ||x_n - x^*||^2
+\end{equation*}
+Outside the bound, convergence is
+\begin{equation*}
+|| \delta_x f(x^*) - \delta_x f(x) - <x^* - x, \delta_x^2 f(x)> || \leq \gamma ||x^* - x||^2
+\end{equation*}
 
-BFGS approximates Newton's method.
+BFGS approximates Newton's method. It computes the Hessian by approximating the gradient, so computation of inverse is not required.
 
 \section{Parzen Window}
 
@@ -261,8 +268,8 @@ Conditions for a smoothing kernel are $\int k(x) dx = 1$, $\int x k(x) dx = 0$, 
 
 If the Karush-Kuhn-Tucker conditions
 \begin{itemize}
-	\item \emph{Primal constraint satisfaction:} $f_i (x) \leq 0,\:i = 1, ..., m;\:h_i(x) = 0,\:i = 1, ..., p$
-	\item \emph{Dual constrain satisfaction:} $\lambda \geq 0$
+	\item \emph{Primal constraint satisfaction:} Satisfies original constraints
+	\item \emph{Dual constraint satisfaction:} $\delta_x L(x^*, \alpha^*) \leq 0$
 	\item \emph{Complementary slackness:} $\lambda_i f_i(x) = 0,\:i = 1, ..., m$
 	\item \emph{Lagrangian gradient condition:} $\nabla_x f_0(x) + \sum_{i = 1}^{m} \lambda_i \nabla_x f_i(x) + \sum_{i = 1}^{p} v_i \nabla_x h_i(x) = 0$
 \end{itemize}
@@ -280,7 +287,7 @@ J_F(x_1, ..., x_n) = \frac{\delta (F_1, ..., F_m)}{\delta (x_1, ..., x_n)} = \le
 
 Given a real-valued function $f(x_1, x_2, ..., x_n)$, the second partial derivatives of which all exist and are continuous over the domain of $f$, its Hessian is:
 \begin{equation*}
- = \left[ \begin{array}{cccc}
+H(f) = \left[ \begin{array}{cccc}
 	\frac{\delta^2 f}{\delta x_1^2} & \frac{\delta^2 f}{\delta x_1\,\delta x_2} & ... & \frac{\delta^2 f}{\delta x_1\,\delta x_n}\\
 	\frac{\delta^2 f}{\delta x_2\,\delta x_1} & \frac{\delta^2 f}{\delta x_2^2} & ... & \frac{\delta^2 f}{\delta x_2\,\delta x_n}\\
 	\vdots & \vdots & \ddots & \vdots\\
