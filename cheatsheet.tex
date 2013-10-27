@@ -199,6 +199,8 @@ w^T x + b &= (\sum \alpha_i y_i x_i)^T x + b\\
 \end{align*}
 Solving for $b$ for $\alpha_k > 0$ gives $b = y_k - <w, x_k>$.
 
+\emph{Note} that $L(x^*, \lambda) \leq L(x^*, \lambda^*) \leq L(x, \lambda^*)$
+
 \subsubsection{SVM with soft margins}
 
 Minimize $\frac{1}{2} ||w||^2 + C \sum \xi_i$, subject to constraints $y_i (w^T x_i + b) \geq 1 - \xi_i$ and $\xi_i \geq 0$.
