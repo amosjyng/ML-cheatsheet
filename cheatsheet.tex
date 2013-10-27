@@ -222,11 +222,17 @@ If we don't include $b$ as part of $w$, this becomes
 
 \subsection{Gradient Descent}
 
-Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gamma_n \nabla F(x_n)$, where $n \geq 0$.
+Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gamma_n \nabla F(x_n)$, where $n \geq 0$. Alternatively, use line search to find slip size $t$. If $F$ is convex, then this converges to the global solution. 
 
-If $F$ is convex, then this converges to the global solution.
+$k \leq \frac{M}{m} log \frac{f(x) - f(x^*)}{\epsilon}$, where $m$ is the parabola underneath and $M$ is the parabola over $f$, which is bounded by the two.
 
-\subsection{Stochastic Gradient Descent}
+\subsubsection{Gradient Descent Line Search}
+
+\begin{equation*}
+t \geq log(A - B) - log(\epsilon)
+\end{equation*}
+
+\subsubsection{Stochastic Gradient Descent}
 
 Essentially the same as gradient descent, except that at each iteration only one training point is taken into consideration instead of the entire training set.
 
@@ -236,7 +242,7 @@ Since it is a randomized algorithm, it doesn't give the same values every time. 
 \begin{equation*}
 \textmd{Regret} = \textmd{Current Performance} - \textmd{Best possible performance} < \ensuremath{\mathcal{O}}(1/\sqrt{t})
 \end{equation*}
-$\alpha$ is the learning rate.
+$\alpha$ is the learning rate. The best possible performance is when the loss function is strongly convex, in which case regret is $< \ensuremath{\mathcal{O}}(1/T)$
 
 \subsection{Newton's Method}
 
