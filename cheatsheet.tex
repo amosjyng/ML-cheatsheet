@@ -97,7 +97,7 @@
 \setlength{\columnsep}{2pt}
 
 \begin{center}
-     \Large{\textbf{Machine-Learning Cheat Sheet}} \\
+     \Large{\textbf{Machine Learning Cheat Sheet}} \\
 \end{center}
 
 \section{Estimating Parameters}
@@ -238,6 +238,8 @@ x_{new} = x_{old} - \frac{f'(x)}{f''(x)}
 \end{equation*}
 Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable.
 
+BFGS approximates Newton's method.
+
 \section{Parzen Window}
 
 \begin{align*}
@@ -278,6 +280,39 @@ Given a real-valued function $f(x_1, x_2, ..., x_n)$, the second partial derivat
  \end{array} \right]
 \end{equation*}
 This is related to the Jacobian by $H(f)(x) = J(\nabla f)(x)$
+
+\subsection{Convexity}
+
+\subsubsection{Convexity}
+
+Set $C$ is convex if $\lambda x + (1 - \lambda) y \in C\;\forall x,y \in C,\:\lambda \in [0,1]$
+
+Function $f$ is convex if its epigraph is a convex set; i.e. all these three conditions are equivalent:
+\begin{align*}
+f(\lambda x + (1 - \lambda) y) &\leq \lambda f(x) + (1 - \lambda) f(y), \; \lambda \in [0,1]\\
+f(y) - f(x) &\geq f'(x) (y - x), \; x,y \in \textmd{dom }f\\
+f''(x) &\geq 0
+\end{align*}
+
+If $f(x)$ and $g(x)$ are convex, then $a f(x)$, $f(Ax + b)$, $f(x) + g(x)$, $max(f(x), g(x))$, and $g(f(x))$ are also convex.
+
+\subsubsection{Strict convexity}
+
+Has unique minima. Here the Hessian condition is sufficient but \emph{not} necessary for strict convexity.
+\begin{align*}
+f(\lambda x + (1 - \lambda) y) &< \lambda f(x) + (1 - \lambda) f(y), \; \lambda \in [0,1]\\
+f(y) - f(x) &> f'(x) (y - x), \; x,y \in \textmd{dom }f\\
+f''(x) &> 0
+\end{align*}
+
+\subsubsection{Strong convexity}
+
+If $m$ is the curvature coefficient, then
+\begin{align*}
+f(\lambda x + (1 - \lambda) y) &\leq \lambda f(x) + (1 - \lambda) f(y) - \frac{m}{2} \lambda (1 - \lambda) ||x - y||_2^2\\
+f(y) - f(x) &\geq f'(x) (y - x) + \frac{m}{2} ||y - x||_2^2\\
+f''(x) &\geq mI
+\end{align*}
 
 \end{multicols}
 \end{document}
