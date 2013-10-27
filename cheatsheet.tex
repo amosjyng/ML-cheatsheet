@@ -230,6 +230,14 @@ If $F$ is convex, then this converges to the global solution.
 
 Essentially the same as gradient descent, except that at each iteration only one training point is taken into consideration instead of the entire training set.
 
+Randomly shuffle data points, and then repeat for $i = 1 ... n$, $\theta_{t + 1} := \theta_t - \alpha \delta_\theta (y_i, <\phi(x_i), \theta_t>)$ until convergence, where $\delta_\theta(y_i, <\phi(x_i), \theta>) = \frac{\delta}{\delta \theta} \left[ \frac{1}{2} (y_i - <x_i, w>)^2 \right]$ (essentially taking the derivative of the loss function).
+
+Since it is a randomized algorithm, it doesn't give the same values every time. Run $n$ times and pick the best. It reaches close to the optimum, but not exactly.
+\begin{equation*}
+\textmd{Regret} = \textmd{Current Performance} - \textmd{Best possible performance} < \ensuremath{\mathcal{O}}(1/\sqrt{t})
+\end{equation*}
+$\alpha$ is the learning rate.
+
 \subsection{Newton's Method}
 
 Choose an initial point that is close enough to $x^*$, then update
