@@ -214,6 +214,30 @@ If we don't include $b$ as part of $w$, this becomes
 
 \subsection{SVM}
 
+\section{Optimization}
+
+\subsection{Linear Programming}
+
+\subsection{Quadratic Programming}
+
+\subsection{Gradient Descent}
+
+Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gamma_n \nabla F(x_n)$, where $n \geq 0$.
+
+If $F$ is convex, then this converges to the global solution.
+
+\subsection{Stochastic Gradient Descent}
+
+Essentially the same as gradient descent, except that at each iteration only one training point is taken into consideration instead of the entire training set.
+
+\subsection{Newton's Method}
+
+Choose an initial point that is close enough to $x^*$, then update
+\begin{equation*}
+x_{new} = x_{old} - \frac{f'(x)}{f''(x)}
+\end{equation*}
+Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable.
+
 \section{Parzen Window}
 
 \begin{align*}
@@ -222,6 +246,38 @@ p_{emp}(x) &= \frac{1}{n} \sum_{i = 1}^{n} \delta_{xi}(x)\\
 \end{align*}
 
 Conditions for a smoothing kernel are $\int k(x) dx = 1$, $\int x k(x) dx = 0$, and $\int x^2 k(x) dx = 0$.
+
+\section{Duality / KKT}
+
+If the Karush-Kuhn-Tucker conditions
+\begin{itemize}
+	\item \emph{Primal constraint satisfaction:} $f_i (x) \leq 0,\:i = 1, ..., m;\:h_i(x) = 0,\:i = 1, ..., p$
+	\item \emph{Dual constrain satisfaction:} $\lambda \geq 0$
+	\item \emph{Complementary slackness:} $\lambda_i f_i(x) = 0,\:i = 1, ..., m$
+	\item \emph{Lagrangian gradient condition:} $\nabla_x f_0(x) + \sum_{i = 1}^{m} \lambda_i \nabla_x f_i(x) + \sum_{i = 1}^{p} v_i \nabla_x h_i(x) = 0$
+\end{itemize}
+
+\section{Math}
+
+Given a vector-valued function $F: R^n \rightarrow R^m$ (i.e. it is given by $m$ real-valued component functions of the form $F_i(x_1, ..., x_n)$), its Jacobian is:
+\begin{equation*}
+J_F(x_1, ..., x_n) = \frac{\delta (F_1, ..., F_m)}{\delta (x_1, ..., x_n)} = \left[ \begin{array}{ccc}
+	\frac{\delta F_1}{\delta x_1} & ... & \frac{\delta F_1}{\delta x_n}\\
+	\vdots & \ddots & \vdots\\
+	\frac{\delta F_n}{\delta x_1} & ... & \frac{\delta F_n}{\delta x_n}
+ \end{array} \right]
+\end{equation*}
+
+Given a real-valued function $f(x_1, x_2, ..., x_n)$, the second partial derivatives of which all exist and are continuous over the domain of $f$, its Hessian is:
+\begin{equation*}
+ = \left[ \begin{array}{cccc}
+	\frac{\delta^2 f}{\delta x_1^2} & \frac{\delta^2 f}{\delta x_1\,\delta x_2} & ... & \frac{\delta^2 f}{\delta x_1\,\delta x_n}\\
+	\frac{\delta^2 f}{\delta x_2\,\delta x_1} & \frac{\delta^2 f}{\delta x_2^2} & ... & \frac{\delta^2 f}{\delta x_2\,\delta x_n}\\
+	\vdots & \vdots & \ddots & \vdots\\
+	\frac{\delta^2 f}{\delta x_n\,\delta x_1} & \frac{\delta^2 f}{\delta x_n\,\delta x_2} & ... & \frac{\delta^2 f}{\delta x_n^2}
+ \end{array} \right]
+\end{equation*}
+This is related to the Jacobian by $H(f)(x) = J(\nabla f)(x)$
 
 \end{multicols}
 \end{document}
