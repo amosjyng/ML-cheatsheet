@@ -207,6 +207,24 @@ Minimize $\frac{1}{2} ||w||^2 + C \sum \xi_i$, subject to constraints $y_i (w^T 
 
 The dual is maximizing $\sum \alpha_i - (1/2) \sum_i \sum_j y_i y_j \alpha_i \alpha_j <x_i, x_j>$ subject to $0 \leq \alpha \leq c$ and $\sum \alpha_i y_i = 0$.
 
+\subsection{kNN}
+
+Given a region, $\hat{p}(x)$ majority class, where $\hat{p}$ is the probability of getting it correct. Error rate is $1 - \hat{p}(x)$. As the \# of neighbors go to $\infty$ as $n \rightarrow \infty$, $k \in \ensuremath{\mathcal{O}}(\sqrt{n})$
+
+\subsection{Cross-validation}
+
+\subsubsection{LOOCV}
+
+\begin{align*}
+\log p(x_i | X - x_i) &= \log \frac{1}{n - 1} \sum_{j \neq i} k(x_i, x_j)\\
+p(x_i) &= \frac{1}{n} \sum k(x_i, x)\\
+\frac{1}{n} \sum_{i = 1}^{n} &\log \left[ \frac{n}{n - 1} p(x_i) - \frac{1}{n - 1} k(x_i, x_i) \right]\\
+\end{align*}
+
+\subsubsection{k-fold}
+
+Error is $(k - 1) / k$.
+
 \section{Convergence of...}
 
 \subsection{Gradient Descent}
@@ -310,6 +328,8 @@ BFGS approximates Newton's method. It computes the Hessian by approximating the 
 p_{emp}(x) &= \frac{1}{n} \sum_{i = 1}^{n} \delta_{xi}(x)\\
 \hat{p}(x) &= \frac{1}{n} \sum_{i = 1}^{n} k_{xi}(x)
 \end{align*}
+
+Doing MLE on Parzen $\hat{p}(x) \rightarrow \infty$ as $k \rightarrow \infty$, so do leave-one-out estimation.
 
 Conditions for a smoothing kernel are $\int k(x) dx = 1$, $\int x k(x) dx = 0$, and $\int x^2 k(x) dx = 0$.
 
