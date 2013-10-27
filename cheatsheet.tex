@@ -264,7 +264,15 @@ If we don't include $b$ as part of $w$, this becomes
 
 \subsection{Linear Programming}
 
+Minimize $c^T x$ subject to $A x \leq b$ and $x \geq 0$.
+
 \subsection{Quadratic Programming}
+
+Minimize $f(x) = \frac{1}{2} x^T Q x + c^T x$ subject to either
+\begin{itemize}
+	\item $A x \leq b$ (inequality constraint)
+	\item $E x = d$ (equality constraint)
+\end{itemize}
 
 \subsection{Gradient Descent}
 
