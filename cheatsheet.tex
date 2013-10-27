@@ -266,13 +266,14 @@ Conditions for a smoothing kernel are $\int k(x) dx = 1$, $\int x k(x) dx = 0$, 
 
 \section{Duality / KKT}
 
-If the Karush-Kuhn-Tucker conditions
+The Karush-Kuhn-Tucker conditions are
 \begin{itemize}
-	\item \emph{Primal constraint satisfaction:} Satisfies original constraints
-	\item \emph{Dual constraint satisfaction:} $\delta_x L(x^*, \alpha^*) \leq 0$
-	\item \emph{Complementary slackness:} $\lambda_i f_i(x) = 0,\:i = 1, ..., m$
-	\item \emph{Lagrangian gradient condition:} $\nabla_x f_0(x) + \sum_{i = 1}^{m} \lambda_i \nabla_x f_i(x) + \sum_{i = 1}^{p} v_i \nabla_x h_i(x) = 0$
+	\item \emph{Primal feasibility:} Satisfies original constraints
+	\item \emph{Dual feasibility:} $\delta_x L(x^*, \alpha^*) \leq 0$
+	\item \emph{Complementary slackness:} $\sum_{i} \alpha_i^* c_i(x^*) - 0$
+	\item \emph{Stationarity:} $\delta_x L(x^*, a^*) = 0$
 \end{itemize}
+where $L = f(x) + \lambda c(x)$, where $c(x)$ is a matrix of the constraints. Under strong duality, if these conditions are satisfied, then the solution of the dual is equal to the solution of the primal.
 
 \section{Math}
 
