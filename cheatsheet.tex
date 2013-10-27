@@ -254,6 +254,18 @@ Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gam
 
 $k \leq \frac{M}{m} log \frac{f(x) - f(x^*)}{\epsilon}$, where $m$ is the parabola underneath and $M$ is the parabola over $f$, which is bounded by the two.
 
+Rohan:
+\begin{align*}
+B_j &:= B_j - \alpha \frac{\delta}{\delta \beta_j} J(\beta)\\
+J(\beta) &= \frac{1}{2} \sum_{1}^{n} (\beta^T x - y)^2\\
+\frac{\delta J(\beta)}{\beta_i} &= (\beta^T x - y) x_i\\
+\beta &= (x^T x)^{-1} x^t \vec{y}\\
+y_i &= \theta^T x_i + \epsilon\\
+\epsilon &\sim N(0, \gamma^2)\\
+P(\epsilon_i) &= \frac{1}{\sqrt{2\pi} \sigma} exp \left( - \frac{\epsilon_i^2}{2 \sigma^2} \right)\\
+P(y_i | x_i, \theta) &= \frac{1}{\sqrt{2 \pi} \sigma} exp \left( - \frac{(y_i - \theta^T x_i)^2}{2 \gamma^2} \right)
+\end{align*}
+
 \subsubsection{Gradient Descent Line Search}
 
 \begin{equation*}
@@ -278,6 +290,9 @@ Choose an initial point that is close enough to $x^*$, then update
 \begin{equation*}
 x_{new} = x_{old} - \frac{f'(x)}{f''(x)}
 \end{equation*}
+or $\beta := \beta - H^{-1} \nabla_\beta l(\beta)$
+It is one iteration more expensive than gradient descent by convex ???
+
 Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable. Inside the bound, convergence is
 \begin{equation*}
 ||x_{n + 1} - x^*|| \leq \gamma || \left[ \delta_x^2 f(x_n) \right]^{-1} || ||x_n - x^*||^2
