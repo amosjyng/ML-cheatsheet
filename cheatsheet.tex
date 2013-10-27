@@ -179,6 +179,32 @@ Note that the perceptron is the same as stochastic gradient descent with a hinge
 
 \subsection{SVM}
 
+Minimize $\frac{1}{2} ||w||^2$ such that $y_i (w^T x_i + b) \geq i,\: i = 1 ... m$
+\begin{align*}
+g_i(w) &= -y_i (w^T x_i + b) + 1 \leq 0\\
+L(w, b, \alpha) &= \frac{1}{2} ||w||^2 - \sum_{i = 1}^{m} \alpha_i \left[ y_i (w^T x_i + b) - 1 \right]\\
+\nabla_w' L &= w - \sum_{i = 1}^{m} \alpha_i y_i x_i = 0\\
+\frac{\delta}{\delta b} L &= \sum \alpha_i y_i = 0
+\end{align*}
+The dual form:
+\begin{align*}
+\underset{\alpha}{\max} \sum_{i = 1}^{m} \alpha_i &- \frac{1}{2} \sum_{i,j=1}^{m} y_i y_j \alpha_i \alpha_j <x_i, x_j>\\
+\alpha_i &\geq 0\\
+\sum \alpha_i y_i &= 0
+\end{align*}
+Solve for $w$ from
+\begin{align*}
+w^T x + b &= (\sum \alpha_i y_i x_i)^T x + b\\
+&= \sum a_i y_i <x_i, x> + b
+\end{align*}
+Solving for $b$ for $\alpha_k > 0$ gives $b = y_k - <w, x_k>$.
+
+\subsubsection{SVM with soft margins}
+
+Minimize $\frac{1}{2} ||w||^2 + C \sum \xi_i$, subject to constraints $y_i (w^T x_i + b) \geq 1 - \xi_i$ and $\xi_i \geq 0$.
+
+The dual is maximizing $\sum \alpha_i - (1/2) \sum_i \sum_j y_i y_j \alpha_i \alpha_j <x_i, x_j>$ subject to $0 \leq \alpha \leq c$ and $\sum \alpha_i y_i = 0$.
+
 \section{Convergence of...}
 
 \subsection{Gradient Descent}
@@ -276,10 +302,12 @@ The Karush-Kuhn-Tucker conditions are
 \begin{itemize}
 	\item \emph{Primal feasibility:} Satisfies original constraints
 	\item \emph{Dual feasibility:} $\delta_x L(x^*, \alpha^*) \leq 0$
-	\item \emph{Complementary slackness:} $\sum_{i} \alpha_i^* c_i(x^*) - 0$
+	\item \emph{Complementary slackness:} $\sum_{i} \alpha_i^* c_i(x^*) = 0$
 	\item \emph{Stationarity:} $\delta_x L(x^*, a^*) = 0$
 \end{itemize}
-where $L = f(x) + \lambda c(x)$, where $c(x)$ is a matrix of the constraints. Under strong duality, if these conditions are satisfied, then the solution of the dual is equal to the solution of the primal.
+where $L = f(x) + \lambda c(x)$, where $c(x)$ is a matrix of the constraints. Under strong duality (values of Lagrangian is strictly less than value of primal), if these conditions are satisfied, then the solution of the dual is equal to the solution of the primal.
+
+To solve a Lagrangian multipliers problem, first find $L$, then take the partial of $L$ with respect to every variable of $L$ and set these partials to 0. Substitute the variables back into $L$ to get an equation without those original variables and only the $\lambda$'s. Now the goal is to maximize this expression, subject to the constraints $\lambda_i \geq 0$ and the partials equaling 0.
 
 \section{Math}
 
