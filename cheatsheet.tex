@@ -214,7 +214,7 @@ If we don't include $b$ as part of $w$, this becomes
 
 \subsection{SVM}
 
-Minimize $\frac{1}{2} ||w||^2$ such that $y_i (w^T x_i + b) \geq i,\: i = 1 ... m$
+Minimize $\frac{1}{2} ||w||^2$ such that $y_i (w^T x_i + b) \geq 1,\: i = 1 ... m$
 \begin{align*}
 g_i(w) &= -y_i (w^T x_i + b) + 1 \leq 0\\
 L(w, b, \alpha) &= \frac{1}{2} ||w||^2 - \sum_{i = 1}^{m} \alpha_i \left[ y_i (w^T x_i + b) - 1 \right]\\
