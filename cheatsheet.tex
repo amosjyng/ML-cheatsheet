@@ -278,7 +278,7 @@ Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gam
 $k \leq \frac{M}{m} log \frac{f(x) - f(x^*)}{\epsilon}$, where $m$ is the parabola underneath and $M$ is the parabola over $f$, which is bounded by the two.
 
 \begin{align*}
-B_j &:= B_j - \alpha \frac{\delta}{\delta \beta_j} J(\beta)\\
+\beta_j &:= \beta_j - \alpha \frac{\delta}{\delta \beta_j} J(\beta)\\
 J(\beta) &= \frac{1}{2} \sum_{1}^{n} (\beta^T x - y)^2\\
 \frac{\delta J(\beta)}{\beta_i} &= (\beta^T x - y) x_i\\
 \beta &= (x^T x)^{-1} x^t \vec{y}\\
