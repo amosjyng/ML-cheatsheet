@@ -382,5 +382,20 @@ Given a convex set $C$, the convex hull is $\{\bar{x} | \bar{x} = \sum_{i = 1}^{
 
 $\underset{x}{sup} f(x) = \underset{x \in Co_f}{sup} f(x)$ where $Co_f$ is the convex hull of $f$.
 
+\section{Matrix Differentiation}
+
+\begin{align*}
+\frac{\partial (x - A s)^T W (x - A s)}{\partial s} &= - 2 A^T W (x - A s)\\
+\frac{\partial |x^T A x|}{\partial x} &= |x^T A x| (A x (x^T A x)^{-1} + A^T x (x^T A x)^{-1})\\
+\frac{\partial ((x a + b)^T c (x a + b))}{\partial x} &= (c + c^T) (x a + b) a^T
+\end{align*}
+
+\begin{tabular}{cc}
+$\frac{\partial |A \times B|}{\partial x} = |A \times B| (x^T)^{-1}$ & $\frac{\log |x|}{x} = (x^T)^{-1} = (x^{-1})^T$\\
+$\frac{\partial (a^T x)}{\partial x} = \frac{\partial (x^T a)}{\partial x} = a$ & $\frac{\partial (x^T A x)}{\partial x} = (A + A^T) x$\\
+$\frac{\partial (a^T x b)}{\partial x} = a b^T$ & $\frac{\partial (a^T x^T b)}{\partial x} = b a^T$\\
+$\frac{\partial (a^T x a)}{\partial x} = \frac{\partial (a^T x^T a)}{\partial x} = a a^T$ & $\frac{\partial (a^T x^T c x b)}{\partial x} = c^T x a b^T + c x b a^T$\\
+\end{tabular}
+
 \end{multicols}
 \end{document}
