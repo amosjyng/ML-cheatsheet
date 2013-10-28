@@ -256,15 +256,20 @@ Error is for $(k - 1) / k$ of the training set.
 
 \subsection{Linear Programming}
 
-Minimize $c^T x$ subject to $A x \leq b$ and $x \geq 0$.
+Minimize $c^T x$ subject to $A x \leq b$ and $x \geq 0$. Dual is max $b^T \alpha$ subject to $A^T \alpha + c = 0$ and $\alpha \geq 0$.
 
 \subsection{Quadratic Programming}
 
 Minimize $f(x) = \frac{1}{2} x^T Q x + c^T x$ subject to either
 \begin{itemize}
-	\item $A x \leq b$ (inequality constraint)
-	\item $E x = d$ (equality constraint)
+	\item $A x + d\leq 0$ (inequality constraint)
+	\item $E x = f$ (equality constraint)
 \end{itemize}
+Dual for the inequality constraint is
+\begin{equation*}
+\underset{\alpha}{\min} \frac{1}{2} \alpha^T A Q^{-1} A^T \alpha + \alpha^T [A Q^{-1} c - d]
+\end{equation*}
+subject to $\alpha \geq 0$
 
 \subsection{Gradient Descent}
 
