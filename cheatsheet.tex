@@ -177,6 +177,10 @@ $w$ is some linear combination $\sum_{i} \alpha_i x_i$ of data points, and decis
 
 Note that the perceptron is the same as stochastic gradient descent with a hinge loss function of $max(0, 1 - y_i [<w, x_i> + b])$
 
+\subsubsection{Kernelized Perceptron}
+
+If $y_i (\sum_{j \in I} y_j k(x_j, x_i) + b) \leq 0$, add $i$-th data point to list $I$ and $b := b + y_i$.
+
 \subsection{SVM}
 
 Minimize $\frac{1}{2} ||w||^2$ such that $y_i (w^T x_i + b) \geq i,\: i = 1 ... m$
