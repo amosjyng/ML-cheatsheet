@@ -336,6 +336,21 @@ Doing MLE on Parzen $\hat{p}(x) \rightarrow \infty$ as $k \rightarrow \infty$, s
 
 Conditions for a smoothing kernel are $\int k(x) dx = 1$, $\int x k(x) dx = 0$, and $\int x^2 k(x) dx = 0$.
 
+\subsection{Loss functions}
+
+\begin{tabular}{lc}
+Hinge & $l(y, f(x)) = \max(0, 1 - y \cdot f(x))$\\
+Huber & $ l(y, f(x)) =
+	\begin{cases}
+		\hfill 0 \hfill & \textmd{if } y \cdot f(x) > 1\\
+		\hfill \frac{1}{2} (1 - y f(x))^2 \hfill & \textmd{if } y \cdot f(x) \in [0,1]\\
+		\hfill \frac{1}{2} - y f(x) \hfill & \textmd{if } y \cdot f(x) < 0
+	\end{cases} $\\
+Binary & $l(y, f(x)) = {y \cdot f(x) < 0}$\\
+Logistic & $l(y, f(x)) = \log (1 + \exp(- y \cdot f(x)))$
+\end{tabular}
+\emph{Note} that ``hinge'' is also called ``soft margin.''
+
 \section{Duality / KKT}
 
 The Karush-Kuhn-Tucker conditions are
