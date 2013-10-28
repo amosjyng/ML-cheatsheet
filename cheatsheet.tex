@@ -129,6 +129,14 @@ Differentiate, and solution is
 \left[ \sum_{i = 1}^{n} x_i x_i^T \right] w = \sum_{i = 1}^{n} y_i x_i
 \end{equation*}
 
+$y$ as Gaussian:
+\begin{align*}
+y_i &= \theta^T x_i + \epsilon\\
+\epsilon &\sim N(0, \gamma^2)\\
+P(\epsilon_i) &= \frac{1}{\sqrt{2\pi} \sigma} exp \left( - \frac{\epsilon_i^2}{2 \sigma^2} \right)\\
+P(y_i | x_i, \theta) &= \frac{1}{\sqrt{2 \pi} \sigma} exp \left( - \frac{(y_i - \theta^T x_i)^2}{2 \sigma^2} \right)
+\end{align*}
+
 Eigenvalues of $x^T x$ are positive. Use $x^T M x \geq 0 \:\forall x \in R^n$ to prove this:
 \begin{align*}
 v^T \sum_{i} x_i x_i^T v \geq 0\\
@@ -282,10 +290,6 @@ $k \leq \frac{M}{m} log \frac{f(x) - f(x^*)}{\epsilon}$, where $m$ is the parabo
 J(\beta) &= \frac{1}{2} \sum_{1}^{n} (\beta^T x - y)^2\\
 \frac{\delta J(\beta)}{\beta_i} &= (\beta^T x - y) x_i\\
 \beta &= (x^T x)^{-1} x^t \vec{y}\\
-y_i &= \theta^T x_i + \epsilon\\
-\epsilon &\sim N(0, \gamma^2)\\
-P(\epsilon_i) &= \frac{1}{\sqrt{2\pi} \sigma} exp \left( - \frac{\epsilon_i^2}{2 \sigma^2} \right)\\
-P(y_i | x_i, \theta) &= \frac{1}{\sqrt{2 \pi} \sigma} exp \left( - \frac{(y_i - \theta^T x_i)^2}{2 \sigma^2} \right)
 \end{align*}
 
 \subsubsection{Gradient Descent Line Search}
