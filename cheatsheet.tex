@@ -139,8 +139,6 @@ v^T \sum_{i} x_i x_i^T v \geq 0\\
 
 \section{Classification}
 
-\subsection{Logistic Regression}
-
 \subsection{Naive Bayes}
 
 Assumes that features are independent of one another given the class. Thus, learning and classification for each feature happens independently of other features.
@@ -180,6 +178,31 @@ Note that the perceptron is the same as stochastic gradient descent with a hinge
 \subsubsection{Kernelized Perceptron}
 
 If $y_i (\sum_{j \in I} y_j k(x_j, x_i) + b) \leq 0$, add $i$-th data point to list $I$ and $b := b + y_i$.
+
+\subsubsection{Convergence}
+
+Assume
+\begin{itemize}
+	\item $\exists w^*$ such that $||w^*|| = 1$
+	\item $\exists \gamma > 0$ such that $\forall t = 1 ... n,\ y_t(x_t \cdot w^*) \geq \gamma$
+	\item $\forall t = 1 ... n,\ ||x_t|| \leq R$
+\end{itemize}
+
+Then the perceptron algorithm makes at most $R^2 / \gamma^2$ errors.
+
+Proof
+\begin{itemize}
+	\item Bound $w^{k + 1} \cdot w^* \rightarrow ||w^{k + 1}|| \geq k \gamma$
+	\item Bound $||w^{k + 1}||^2
+	$\begin{align*}
+		k R^2 &\geq ||w^{k + 1}||^2 \geq k^2 \gamma^2\\
+		\frac{R^2}{\gamma^2} &\geq k
+	\end{align*}
+\end{itemize}
+If we don't include $b$ as part of $w$, this becomes
+\begin{equation*}
+	k \leq \frac{(b^* + 1) (r^2 + 1)}{\gamma^2}
+\end{equation*}
 
 \subsection{SVM}
 
@@ -229,41 +252,6 @@ p(x_i) &= \frac{1}{n} \sum k(x_i, x)\\
 
 Error is for $(k - 1) / k$ of the training set.
 
-\section{Convergence of...}
-
-\subsection{Gradient Descent}
-
-\subsection{Stochastic Gradient Descent}
-
-\subsection{Newton Method}
-
-\subsection{Perceptron}
-
-Assume
-\begin{itemize}
-	\item $\exists w^*$ such that $||w^*|| = 1$
-	\item $\exists \gamma > 0$ such that $\forall t = 1 ... n,\ y_t(x_t \cdot w^*) \geq \gamma$
-	\item $\forall t = 1 ... n,\ ||x_t|| \leq R$
-\end{itemize}
-
-Then the perceptron algorithm makes at most $R^2 / \gamma^2$ errors.
-
-Proof
-\begin{itemize}
-	\item Bound $w^{k + 1} \cdot w^* \rightarrow ||w^{k + 1}|| \geq k \gamma$
-	\item Bound $||w^{k + 1}||^2
-	$\begin{align*}
-		k R^2 &\geq ||w^{k + 1}||^2 \geq k^2 \gamma^2\\
-		\frac{R^2}{\gamma^2} &\geq k
-	\end{align*}
-\end{itemize}
-If we don't include $b$ as part of $w$, this becomes
-\begin{equation*}
-	k \leq \frac{(b^* + 1) (r^2 + 1)}{\gamma^2}
-\end{equation*}
-
-\subsection{SVM}
-
 \section{Optimization}
 
 \subsection{Linear Programming}
@@ -304,11 +292,9 @@ t \geq log(A - B) - log(\epsilon)
 
 \subsubsection{Stochastic Gradient Descent}
 
-Essentially the same as gradient descent, except that at each iteration only one training point is taken into consideration instead of the entire training set.
-
 Randomly shuffle data points, and then repeat for $i = 1 ... n$, $\theta_{t + 1} := \theta_t - \alpha \delta_\theta (y_i, <\phi(x_i), \theta_t>)$ until convergence, where $\delta_\theta(y_i, <\phi(x_i), \theta>) = \frac{\delta}{\delta \theta} \left[ \frac{1}{2} (y_i - <x_i, w>)^2 \right]$ (essentially taking the derivative of the loss function).
 
-Since it is a randomized algorithm, it doesn't give the same values every time. Run $n$ times and pick the best. It reaches close to the optimum, but not exactly.
+It's randomized -- run $n$ times and pick best. Reaches close to but not quite the optimum.
 \begin{equation*}
 \textmd{Regret} = \textmd{Current Perf.} - \textmd{Best possible perf.} < \ensuremath{\mathcal{O}}(1/\sqrt{t})
 \end{equation*}
@@ -316,11 +302,7 @@ $\alpha$ is the learning rate. The best possible performance is when the loss fu
 
 \subsection{Newton's Method}
 
-Choose an initial point that is close enough to $x^*$, then update
-\begin{equation*}
-x_{new} = x_{old} - \frac{f'(x)}{f''(x)}
-\end{equation*}
-or $\beta := \beta - H^{-1}(l(\beta)) \nabla_\beta l(\beta)$. Every iteration is more expensive than GD, but converges faster within a bound.
+Choose an initial point that is close enough to $x^*$, then update $\beta := \beta - f'(x)/f''(x)$ or $\beta := \beta - H^{-1}(l(\beta)) \nabla_\beta l(\beta)$. Every iteration is more expensive than GD, but converges faster within a bound.
 
 Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable. Inside the bound,
 \begin{equation*}
@@ -358,31 +340,7 @@ where $L = f(x) + \lambda c(x)$, where $c(x)$ is a matrix of the constraints. Un
 
 To solve a Lagrangian multipliers problem, first find $L$, then take the partial of $L$ with respect to every variable of $L$ and set these partials to 0. Substitute the variables back into $L$ to get an equation without those original variables and only the $\lambda$'s. Now the goal is to maximize this expression, subject to the constraints $\lambda_i \geq 0$ and the partials equaling 0.
 
-\section{Math}
-
-Given a vector-valued function $F: R^n \rightarrow R^m$ (i.e. it is given by $m$ real-valued component functions of the form $F_i(x_1, ..., x_n)$), its Jacobian is:
-\begin{equation*}
-J_F(x_1, ..., x_n) = \frac{\delta (F_1, ..., F_m)}{\delta (x_1, ..., x_n)} = \left[ \begin{array}{ccc}
-	\frac{\delta F_1}{\delta x_1} & ... & \frac{\delta F_1}{\delta x_n}\\
-	\vdots & \ddots & \vdots\\
-	\frac{\delta F_n}{\delta x_1} & ... & \frac{\delta F_n}{\delta x_n}
- \end{array} \right]
-\end{equation*}
-
-Given a real-valued function $f(x_1, x_2, ..., x_n)$, the second partial derivatives of which all exist and are continuous over the domain of $f$, its Hessian is:
-\begin{equation*}
-H(f) = \left[ \begin{array}{cccc}
-	\frac{\delta^2 f}{\delta x_1^2} & \frac{\delta^2 f}{\delta x_1\,\delta x_2} & ... & \frac{\delta^2 f}{\delta x_1\,\delta x_n}\\
-	\frac{\delta^2 f}{\delta x_2\,\delta x_1} & \frac{\delta^2 f}{\delta x_2^2} & ... & \frac{\delta^2 f}{\delta x_2\,\delta x_n}\\
-	\vdots & \vdots & \ddots & \vdots\\
-	\frac{\delta^2 f}{\delta x_n\,\delta x_1} & \frac{\delta^2 f}{\delta x_n\,\delta x_2} & ... & \frac{\delta^2 f}{\delta x_n^2}
- \end{array} \right]
-\end{equation*}
-This is related to the Jacobian by $H(f)(x) = J(\nabla f)(x)$
-
 \subsection{Convexity}
-
-\subsubsection{Convexity}
 
 Set $C$ is convex if $\lambda x + (1 - \lambda) y \in C\;\forall x,y \in C,\:\lambda \in [0,1]$
 
