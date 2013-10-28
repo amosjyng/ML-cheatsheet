@@ -209,7 +209,7 @@ The dual is maximizing $\sum \alpha_i - (1/2) \sum_i \sum_j y_i y_j \alpha_i \al
 
 \subsection{kNN}
 
-Given a region, $\hat{p}(x)$ majority class, where $\hat{p}$ is the probability of getting it correct. Error rate is $1 - \hat{p}(x)$. As the \# of neighbors go to $\infty$ as $n \rightarrow \infty$, $k \in \ensuremath{\mathcal{O}}(\sqrt{n})$
+Given a region where $\hat{p}(x)$ of the data points are in the majority class, there is a $\hat{p}$ probability of getting a test point correct. Error rate is $1 - \hat{p}(x)$. As the \# of neighbors go to $\infty$ and as $n \rightarrow \infty$, $k \in \ensuremath{\mathcal{O}}(\sqrt{n})$. Error for 1NN is $2\hat{p} (1 - \hat{p})$ and error for kNN is $\min(\hat{p}, 1 - \hat{p})$.
 
 \subsection{Cross-validation}
 
@@ -223,7 +223,7 @@ p(x_i) &= \frac{1}{n} \sum k(x_i, x)\\
 
 \subsubsection{k-fold}
 
-Error is $(k - 1) / k$.
+Error is for $(k - 1) / k$ of the training set.
 
 \section{Convergence of...}
 
@@ -276,11 +276,10 @@ Minimize $f(x) = \frac{1}{2} x^T Q x + c^T x$ subject to either
 
 \subsection{Gradient Descent}
 
-Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gamma_n \nabla F(x_n)$, where $n \geq 0$. Alternatively, use line search to find slip size $t$. If $F$ is convex, then this converges to the global solution. 
+Guess $x_0$ to be a local minimum of $F(x)$, then obtain $x_{n + 1} = x_n - \gamma_n \nabla F(x_n)$, where $n \geq 0$. Either use fixed step size $t$ or use line search to find optimal $\gamma_n$. If $F$ is convex, then this converges to the global solution. Usually we take $F = (1/h) \sum l(x_i; M)$ to be the loss function, and we try to minimize the loss function.
 
 $k \leq \frac{M}{m} log \frac{f(x) - f(x^*)}{\epsilon}$, where $m$ is the parabola underneath and $M$ is the parabola over $f$, which is bounded by the two.
 
-Rohan:
 \begin{align*}
 B_j &:= B_j - \alpha \frac{\delta}{\delta \beta_j} J(\beta)\\
 J(\beta) &= \frac{1}{2} \sum_{1}^{n} (\beta^T x - y)^2\\
@@ -289,11 +288,12 @@ J(\beta) &= \frac{1}{2} \sum_{1}^{n} (\beta^T x - y)^2\\
 y_i &= \theta^T x_i + \epsilon\\
 \epsilon &\sim N(0, \gamma^2)\\
 P(\epsilon_i) &= \frac{1}{\sqrt{2\pi} \sigma} exp \left( - \frac{\epsilon_i^2}{2 \sigma^2} \right)\\
-P(y_i | x_i, \theta) &= \frac{1}{\sqrt{2 \pi} \sigma} exp \left( - \frac{(y_i - \theta^T x_i)^2}{2 \gamma^2} \right)
+P(y_i | x_i, \theta) &= \frac{1}{\sqrt{2 \pi} \sigma} exp \left( - \frac{(y_i - \theta^T x_i)^2}{2 \sigma^2} \right)
 \end{align*}
 
 \subsubsection{Gradient Descent Line Search}
 
+Gradient descent in one dimension. Converges according to
 \begin{equation*}
 t \geq log(A - B) - log(\epsilon)
 \end{equation*}
@@ -306,7 +306,7 @@ Randomly shuffle data points, and then repeat for $i = 1 ... n$, $\theta_{t + 1}
 
 Since it is a randomized algorithm, it doesn't give the same values every time. Run $n$ times and pick the best. It reaches close to the optimum, but not exactly.
 \begin{equation*}
-\textmd{Regret} = \textmd{Current Performance} - \textmd{Best possible performance} < \ensuremath{\mathcal{O}}(1/\sqrt{t})
+\textmd{Regret} = \textmd{Current Perf.} - \textmd{Best possible perf.} < \ensuremath{\mathcal{O}}(1/\sqrt{t})
 \end{equation*}
 $\alpha$ is the learning rate. The best possible performance is when the loss function is strongly convex, in which case regret is $< \ensuremath{\mathcal{O}}(1/T)$
 
@@ -316,19 +316,19 @@ Choose an initial point that is close enough to $x^*$, then update
 \begin{equation*}
 x_{new} = x_{old} - \frac{f'(x)}{f''(x)}
 \end{equation*}
-or $\beta := \beta - H^{-1} \nabla_\beta l(\beta)$
-It is one iteration more expensive than gradient descent by convex ???
+or $\beta := \beta - H^{-1}(l(\beta)) \nabla_\beta l(\beta)$. Every iteration is more expensive than GD, but converges faster within a bound.
 
-Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable. Inside the bound, convergence is
+Converges quadratically in the region near the optimal value, given that the Hessian can be found and that $f(x)$ is twice differentiable. Inside the bound,
 \begin{equation*}
 ||x_{n + 1} - x^*|| \leq \gamma || \left[ \delta_x^2 f(x_n) \right]^{-1} || ||x_n - x^*||^2
 \end{equation*}
-Outside the bound, convergence is
+Outside the bound,
 \begin{equation*}
 || \delta_x f(x^*) - \delta_x f(x) - <x^* - x, \delta_x^2 f(x)> || \leq \gamma ||x^* - x||^2
 \end{equation*}
+and it is as bad as gradient descent.
 
-BFGS approximates Newton's method. It computes the Hessian by approximating the gradient, so computation of inverse is not required.
+BFGS approximates Newton's method. It computes the Hessian by approximating the gradient, so computation of $H^{-1}$ is not required.
 
 \section{Parzen Window}
 
