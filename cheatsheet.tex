@@ -356,9 +356,9 @@ Logistic & $l(y, f(x)) = \log (1 + \exp(- y \cdot f(x)))$
 The Karush-Kuhn-Tucker conditions are
 \begin{itemize}
 	\item \emph{Primal feasibility:} Satisfies original constraints
-	\item \emph{Dual feasibility:} $\delta_x L(x^*, \alpha^*) \leq 0$
-	\item \emph{Complementary slackness:} $\sum_{i} \alpha_i^* c_i(x^*) = 0$
-	\item \emph{Stationarity:} $\delta_x L(x^*, a^*) = 0$
+	\item \emph{Dual feasibility:} $\delta_{\alpha_i} L(x^*, \alpha^*) = c_i(x^*) \leq 0$ (saddle point in $\alpha^*$)
+	\item \emph{Complementary slackness:} $\sum_{i} \alpha_i^* c_i(x^*) = 0$ (vanishing KKT gap)
+	\item \emph{Stationarity:} $\delta_x L(x^*, a^*) = \delta_x f(x^*) + \sum \alpha_i^* \delta_x c_i(x^*) = 0$ (saddle point in $x^*$)
 \end{itemize}
 where $L = f(x) + \lambda c(x)$, where $c(x)$ is a matrix of the constraints. Under strong duality (values of Lagrangian is strictly less than value of primal), if these conditions are satisfied, then the solution of the dual is equal to the solution of the primal.
 
